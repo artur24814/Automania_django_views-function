@@ -29,6 +29,7 @@ urlpatterns = [
     path('logout/', logout_view),
     path('register/', register_view),
     path('', views.homepage),
+    path('search/', views.search_views),
     path('all_car/', views.all_car),
     path('createCar/', views.createCar),
     path('car/<int:id>/', views.carView),

@@ -1,0 +1,33 @@
+{% extends "automania/base.html" %}
+
+{% block title1 %}Search{% endblock %}
+
+
+{% block content %}
+
+{% if cars %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+    {% for car in cars %}
+<div class="col">
+        <div class="card">
+            <div class="card-header">
+           {{ car.brand }} {{ car.year }}
+           </div>
+           <div class="card-body">
+           <h5 class="card-title">{{ car.price }}</h5>
+               <img src="{{ car.image.url }}" height="100" width="100">
+           <p class="card-text">{{ car.country }}</p>
+           <a href="{{ car.get_url }}" class="btn btn-primary">Watch Car</a>
+          </div>
+        </div>
+        </div>
+    {% endfor %}
+
+    </div>
+
+   {% else %}
+       <p> no results.....</p>
+   {% endif %}
+
+{% endblock %}

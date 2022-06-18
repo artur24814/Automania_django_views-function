@@ -17,6 +17,15 @@ def homepage(request):
     }
     return render(request, "automania/homepage.html", result)
 
+def search_views(request):
+    if request.method == "POST":
+        question = request.POST.get('search')
+        cars = Car.objects.filter(brand__contains= question) | Car.objects.filter(type__contains = question)
+        context = {
+            'cars': cars,
+        }
+        return render(request, 'automania/search.html', context)
+
 @login_required
 def createCar(request):
     if request.method == 'POST':
