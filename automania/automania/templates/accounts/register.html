@@ -1,0 +1,24 @@
+{% extends "automania/base.html" %}
+
+{% block title %} LOGIN {% endblock %}
+
+{% block content %}
+    {% if not request.user.is_authenticated %}
+    <div class="registed"></div>
+    <form method="post">{% csrf_token %}
+    <div>
+        <input type="text" name="name" placeholder="user name"/>
+    </div>
+        <div>
+        <input type="email" name="email" />
+    </div>
+        <div>
+        <input type="password" name="password" />
+    </div>
+        <button type="submit">Login</button>
+    </form>
+    </div>
+    {% else %}
+    <p>You're is alredy logged in <a href="/logout/">Logout</a> </p>
+    {% endif %}
+{% endblock %}

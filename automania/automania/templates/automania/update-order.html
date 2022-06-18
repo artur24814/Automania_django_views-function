@@ -1,0 +1,17 @@
+{% extends "automania/base.html" %}
+
+{% block title %}Update order{% endblock %}
+
+
+{% block content %}
+    <div class="form_group">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Change Order">
+
+    </form>
+    </div>
+
+
+{% endblock %}

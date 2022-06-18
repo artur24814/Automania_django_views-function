@@ -1,0 +1,70 @@
+{% extends "automania/base.html" %}
+
+{% block title1 %}{{ car.brand }} {{ car.year }} {{ car.price }}{% endblock %}
+
+
+{% block content %}
+
+    <div class="conteiner">
+
+    <div class="car">
+<center>
+    <img src="{{ car.image.url }}"><br>
+    </center>
+
+<ol class="list-group ">
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Type, engine</div>
+      {{ car.type }}, {{ car.engine }}
+    </div>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Fuel</div>
+      {{ car.fuel }}
+    </div>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Conditions</div>
+      {{ car.car_condition }}
+    </div>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Country</div>
+      {{ car.country}}
+    </div>
+  </li>
+ <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Transmission</div>
+      {{ car.transmission }}
+    </div>
+  </li>
+ <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Damage</div>
+      {{ car.damage }}
+    </div>
+  </li>
+ <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">descriptions</div>
+      {{ car.descriptions }}
+    </div>
+  </li>
+</ol>
+        </div>
+    <div class="contact" >
+   <h1> Contact with {{ car.published }}
+   </h1>
+        <br>
+        {% load static %}
+        <center>
+        <a href="/messeges/{{ car.published.id }}/" ><img src="{% static 'Messege.png' %}" width="30" height="30"><p>send messege</p></a>
+            </center>
+    </div>
+</div>
+{% endblock %}

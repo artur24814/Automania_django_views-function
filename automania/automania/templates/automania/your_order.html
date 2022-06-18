@@ -1,0 +1,20 @@
+{% extends "automania/base.html" %}
+
+{% block title %}your Order{% endblock %}
+
+
+{% block content %}
+
+    {% for order in orders %}
+        <ul class="list-group">
+           <li class="list-group-item"> Your name {{ order.name }} </li>
+           <li class="list-group-item"> email: {{ order.email }}</li>
+           <li class="list-group-item"> telephone - {{ order.telephone }} </li>
+           <li class="list-group-item"> Adress - {{ order.adress }} </li>
+           <li class="list-group-item"> Your descriptions : {{ order.descriptions }}</li>
+           <li class="list-group-item"> relised - {{ order.realized }}</li>
+           <li class="list-group-item"> date : {{ order.date }}</li>
+           <a href="{{ order.get_order_url }}" class="btn btn-primary">Change your order </a>
+    {% endfor %}
+       </ul>
+{% endblock %}

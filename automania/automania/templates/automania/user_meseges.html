@@ -1,0 +1,56 @@
+{% extends "automania/base.html" %}
+
+{% block title1 %}Your messeges{% endblock %}
+
+
+{% block content %}
+
+<p>
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Sended messeges</a>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Got messeges</button>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">All messeges</button>
+</p>
+<div class="row">
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample1">
+      <div class="card card-body">
+        {% for messege in sends_messeges %}
+          <div class="card">
+              <div class="card-header">
+                 to {{ messege.to_user }}
+              </div>
+              <div class="card-body">
+               {{ messege.text }}
+              </div>
+          {% load static %}
+               <center>
+              <a href="/messeges/{{ messege.to_user.id }}/" ><img src="{% static 'Messege.png' %}" width="30" height="30"><p>Answer</p></a>
+            </center>
+            </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample2">
+      <div class="card card-body">
+        {% for messege in got_messeges %}
+            <div class="card">
+              <div class="card-header">
+                 from {{ messege.from_user }}
+              </div>
+              <div class="card-body">
+               {{ messege.text }}
+              </div>
+            {% load static %}
+               <center>
+              <a href="/messeges/{{ messege.from_user.id }}/" ><img src="{% static 'Messege.png' %}" width="30" height="30"><p>Answer</p></a>
+            </center>
+            </div>
+         {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

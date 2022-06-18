@@ -1,0 +1,18 @@
+{% extends "automania/base.html" %}
+
+{% block title1 %}Send messege{% endblock %}
+
+
+{% block content %}
+
+<h4>{{ from_user.username }} sent messege to {{ to_user.username }}</h4>
+    <form method="post">{% csrf_token %}
+       <div class="mb-3">
+         <label for="exampleFormControlTextarea1" class="form-label">Your messege</label>
+         <textarea class="form-control" name="text"  rows="3"></textarea>
+       </div>
+
+      <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+
+{% endblock %}

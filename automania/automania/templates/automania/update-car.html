@@ -1,0 +1,17 @@
+{% extends "automania/base.html" %}
+
+{% block title %}Create sell car{% endblock %}
+
+
+{% block content %}
+    <div class="form_group">
+    <form action=" " method="post"   enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update">
+
+    </form>
+    </div>
+
+
+{% endblock %}

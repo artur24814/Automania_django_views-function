@@ -1,0 +1,17 @@
+{% extends "automania/base.html" %}
+
+{% block title %}your Order{% endblock %}
+
+
+{% block content %}
+
+    {% for item in items %}
+        <ul class="list-group">
+           <li class="list-group-item"> <strong>{{ item.name }}</strong> </li>
+           <li class="list-group-item"> {{ item.text }}</li>
+           <li class="list-group-item">  <strong>{{ item.stars }}</strong> </li>
+           <li class="list-group-item">  {{ item.datetime }} </li>
+        <p>   </p>
+    {% endfor %}
+       </ul>
+{% endblock %}
