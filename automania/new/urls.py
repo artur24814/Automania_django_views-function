@@ -25,6 +25,7 @@ from accounts.views import login_view, logout_view, register_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #accounts
     path('login/', login_view),
     path('logout/', logout_view),
     path('register/', register_view),
@@ -33,13 +34,19 @@ urlpatterns = [
     path('all_car/', views.all_car),
     path('createCar/', views.createCar),
     path('car/<int:id>/', views.carView),
+    #messages
     path('messeges/<int:id_user>/', views.messege),
+    path('answer-messeges/<int:id_user>/<int:id_message>/', views.answer_to_messege),
     path('user-messeges/', views.user_messeges),
-    path('update-car/<int:id>/', views.update_car),
+    path('delete_message/<int:id_message>/', views.delete_message),
+    #CRUD for order
     path('make-order/', views.make_order),
     path('your-order/', views.your_order),
     path('update-order/<int:id>/', views.update_order),
+    #CRUD for post
     path('your-posts/', views.your_posts),
+    path('update-car/<int:id>/', views.update_car),
+    #opinion
     path('leaving-opinion/', views.leaving_opinion),
     path('opinions/', views.all_opinions),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

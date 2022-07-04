@@ -3,8 +3,8 @@ import random
 from django.contrib.auth.models import User
 
 from django.contrib.auth.decorators import login_required
-from automania.forms import CarForm, OrderForm, OpinionForm
-from automania.models import Car, Order, Opinion, Messeges
+from .forms import CarForm, OrderForm, OpinionForm
+from .models import Car, Order, Opinion, Messeges, ReadedMesseges
 
 
 def homepage(request):
@@ -73,6 +73,8 @@ def make_order(request):
         'form': form
     }
     return render(request,'automania/make_order.html', context)
+
+
 @login_required
 def your_order(request):
     obj = Order.objects.filter(published=request.user)
@@ -80,6 +82,8 @@ def your_order(request):
         'orders': obj
     }
     return render(request, 'automania/your_order.html', context)
+
+
 @login_required
 def your_posts(request):
     obj = Car.objects.filter(published=request.user)
@@ -140,13 +144,16 @@ def leaving_opinion(request):
 
 @login_required
 def messege(request, id_user):
-    to_user = User.objects.get(id=id_user)
+    to_user = get_object_or_404(User, id=id_user)
     if request.method == 'POST':
 
         text = request.POST.get('text')
-        messege = Messeges.objects.create(from_user=request.user, to_user=to_user, text=text)
-        messege.save()
-        return redirect('../..')
+        #create message
+        message = Messeges.objects.create(from_user=request.user, to_user=to_user, text=text)
+        #create unread message
+        unread_message = ReadedMesseges.objects.create(owner=to_user.username, message=message)
+        message.save()
+        redirect('/user-messeges/')
     context = {
         'from_user': request.user,
         'to_user': to_user
@@ -155,13 +162,43 @@ def messege(request, id_user):
 
 @login_required
 def user_messeges(request):
+    all_unread_or_read_message = ReadedMesseges.objects.filter(owner=request.user.username).order_by('data')
     user_send_messeges = Messeges.objects.filter(from_user=request.user).order_by('data')
     user_got_messeges = Messeges.objects.filter(to_user= request.user).order_by('data')
     context = {
+        'all_unread_or_read_message': all_unread_or_read_message,
         'sends_messeges': user_send_messeges,
         'got_messeges': user_got_messeges,
     }
     return render(request, 'automania/user_meseges.html', context)
+
+@login_required
+def answer_to_messege(request, id_user, id_message):
+    read_message = get_object_or_404(ReadedMesseges,id=id_message)
+    print(read_message.read)
+    read_message.read = True
+    read_message.save()
+    to_user = get_object_or_404(User, id=id_user)
+    if request.method == 'POST':
+
+        text = request.POST.get('text')
+        #create message
+        message = Messeges.objects.create(from_user=request.user, to_user=to_user, text=text)
+        #create unread message
+        unread_message = ReadedMesseges.objects.create(owner=to_user.username, message=message)
+        message.save()
+        redirect('/user-messeges/')
+    context = {
+        'from_user': request.user,
+        'to_user': to_user
+    }
+    return render(request, 'automania/messeges.html', context)
+
+@login_required
+def delete_message(request, id_message):
+    delete_messege = get_object_or_404(Messeges, id=id_message)
+    delete_messege.delete()
+    return redirect('/user-messeges')
 
 
 

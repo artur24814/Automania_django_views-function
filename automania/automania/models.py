@@ -110,7 +110,14 @@ class Order(models.Model):
         return f'/update-order/{self.id}'
 
 class Messeges(models.Model):
+
     from_user = models.ForeignKey(User,on_delete=models.CASCADE, related_name='+')
     to_user = models.ForeignKey(User,on_delete=models.CASCADE, related_name='+')
     text = models.TextField()
+    data = models.DateField(auto_now_add=True)
+
+class ReadedMesseges(models.Model):
+    owner = models.CharField(max_length=128)
+    message = models.ForeignKey('Messeges', on_delete=models.CASCADE)
+    read = models.BooleanField(default=False)
     data = models.DateField(auto_now_add=True)
