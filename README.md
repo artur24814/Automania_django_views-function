@@ -8,14 +8,16 @@
   <img src="https://user-images.githubusercontent.com/97242088/172058900-391ffbcf-cec9-4db4-af88-50ec1b854744.png" width="350" >
     
 </p>
-<p>In addition, a logged in user is able to make an order on a car parts and leave opinion on the site. Can contact with seller and negotiate with the seller ets</p> 
+<p>In addition, a logged in user is able to make an order on a car parts and leave opinion on the site. Can contact with seller and negotiate with the seller ets.<br>
+ When you receive the message you will be informed about it. When you press a text message, it will immediately be marked as read</p> 
 
   <p align="center">
+
 
     
   <img src="https://user-images.githubusercontent.com/97242088/174436563-46972048-bbc1-4049-9fbc-9d8c2c3b5c10.png" width="350">
     
-  <img src="https://user-images.githubusercontent.com/97242088/174436589-86dcb924-8782-4ccd-a284-24cfa560e157.png" width="350">
+  <img src="https://user-images.githubusercontent.com/97242088/177140406-a50cda01-79d3-4b1e-bac0-8f910c1ee3d6.png" width="350">
     
 </p>
 <p>A user who is not logged in can see the available offers, but he will not be able to post something himself or leave an opinion</p>
