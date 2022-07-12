@@ -25,11 +25,11 @@ from accounts.views import login_view, logout_view, register_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.homepage),
     #accounts
     path('login/', login_view),
     path('logout/', logout_view),
     path('register/', register_view),
-    path('', views.homepage),
     path('search/', views.search_views),
     path('all_car/', views.all_car),
     path('createCar/', views.createCar),
