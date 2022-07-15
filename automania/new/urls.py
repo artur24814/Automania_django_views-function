@@ -25,15 +25,15 @@ from accounts.views import login_view, logout_view, register_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homepage),
+    path('', views.homepage, name='homepage'),
     #accounts
     path('login/', login_view),
     path('logout/', logout_view),
     path('register/', register_view),
-    path('search/', views.search_views),
-    path('all_car/', views.all_car),
-    path('createCar/', views.createCar),
-    path('car/<int:id>/', views.carView),
+    path('search/', views.search_views, name='search_views'),
+    path('all_car/', views.all_car, name='all_car'),
+    path('createCar/', views.create_car, name='create_car'),
+    path('car/<int:id>/', views.car_detail, name='car_detail'),
     #messages
     path('messeges/<int:id_user>/', views.messege),
     path('answer-messeges/<int:id_user>/<int:id_message>/', views.answer_to_messege),
@@ -44,7 +44,7 @@ urlpatterns = [
     path('your-order/', views.your_order),
     path('update-order/<int:id>/', views.update_order),
     #CRUD for post
-    path('your-posts/', views.your_posts),
+    path('your-posts/', views.your_posts, name='your_posts'),
     path('update-car/<int:id>/', views.update_car),
     #opinion
     path('leaving-opinion/', views.leaving_opinion),

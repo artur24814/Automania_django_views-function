@@ -9,6 +9,8 @@ from .models import Car, Order, Opinion, Messeges, ReadedMesseges
 
 def homepage(request):
     all_car = Car.objects.all()
+    if len(all_car) == 0:
+        return render(request, "automania/homepage.html", {})
     choise = []
     for item in all_car:
         choise.append(item)
@@ -27,15 +29,17 @@ def search_views(request):
         return render(request, 'automania/search.html', context)
 
 @login_required
-def createCar(request):
+def create_car(request):
     if request.method == 'POST':
         form = CarForm(request.POST, request.FILES or None)
 
         if form.is_valid():
-            animal = form.save(commit=False)
-            animal.published = request.user
-            animal.save()
+            new_car = form.save(commit=False)
+            new_car.published = request.user
+            new_car.save()
             return redirect('/')
+        else:
+            return render(request, 'automania/createCar.html', {'form': form})
     else:
         form = CarForm()
     result = {
@@ -44,8 +48,8 @@ def createCar(request):
     return render(request, 'automania/createCar.html', result)
 
 
-def carView(request, id):
-    car = Car.objects.get(id=id)
+def car_detail(request, id):
+    car = get_object_or_404(Car, id=id)
     context = {
         'car': car
     }
