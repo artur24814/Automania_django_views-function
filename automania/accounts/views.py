@@ -4,6 +4,9 @@ from django.shortcuts import render, redirect
 
 
 def login_view(request):
+    """
+    Login view after login redirect to home page
+    """
     if request.method == "POST":
         username = request.POST.get('name')
         password = request.POST.get('password')
@@ -16,17 +19,23 @@ def login_view(request):
     return render(request, 'accounts/login.html', {})
 
 def logout_view(request):
+    """
+    views logout, after logout redirect to login
+    """
     if request.method == "POST":
         logout(request)
         redirect('/login/')
     return render(request, 'accounts/logout.html', {})
 
 def register_view(request):
+    """
+    view for creating new user, after create redirect to login
+    """
     if request.method == 'POST':
         username = request.POST.get('name')
         email = request.POST.get('email')
         password = request.POST.get('password')
         user = User.objects.create_user(username=username, email=email, password=password)
         user.save()
-        return redirect('/')
+        return redirect('/login/')
     return render(request, 'accounts/register.html',{})

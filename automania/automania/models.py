@@ -1,6 +1,5 @@
 from django.db import models
 
-# from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 
 
@@ -68,9 +67,10 @@ class Car(models.Model):
     damage = models.CharField(max_length=64, null=True, choices=[('YES','YES'), ('NOT', 'NOT')])
     published = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField(auto_now_add=True, null=True)
-
+    #url for car detal view
     def get_url(self):
         return f'/car/{self.id}/'
+    #url for car update view
     def get_update_url(self):
         return f'/update-car/{self.id}'
 
@@ -81,7 +81,6 @@ class CarTypes(models.Model):
     pass
 
 class AutoParts(models.Model):
-    pass
     cartypes = models.ForeignKey(CarTypes, null=True, on_delete=models.SET_NULL)
 
 class Order(models.Model):
@@ -98,7 +97,7 @@ class Order(models.Model):
     published = models.ForeignKey(User, on_delete=models.CASCADE, db_constraint=True, null=True)
     date = models.DateField(auto_now_add=True, null=True)
     realized = models.BooleanField(default=False)
-
+    #url fr order detail view
     def get_order_url(self):
         return f'/update-order/{self.id}'
 

@@ -6,6 +6,9 @@ from .models import Car, Messeges, ReadedMesseges, Order, Opinion
 
 
 class ModelTestCase(TestCase):
+    """
+    tests for all Model in automania application
+    """
     def setUp(self):
         user_a = User.objects.create_user(username='usr', password='User_password', email='usr@example.com')
         user_a.is_superuser = True
@@ -59,6 +62,9 @@ class ModelTestCase(TestCase):
         self.assertNotEqual(order_count, 0)
 
 class ViewsTestCase(TestCase):
+    """
+    tests for all views in automania application
+    """
     def setUp(self):
         user_a = User.objects.create_user(username='usr', password='User_password', email='usr@example.com')
         user_a.is_superuser = True

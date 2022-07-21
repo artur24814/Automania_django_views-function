@@ -8,9 +8,14 @@ from .models import Car, Order, Opinion, Messeges, ReadedMesseges
 
 
 def homepage(request):
+    """
+    views for homepage
+    """
     all_car = Car.objects.all()
+    #if we have empty list of all car
     if len(all_car) == 0:
         return render(request, "automania/homepage.html", {})
+    #if not empty we choose random car to show in a homepage
     choise = []
     for item in all_car:
         choise.append(item)
@@ -20,6 +25,9 @@ def homepage(request):
     return render(request, "automania/homepage.html", result)
 
 def search_views(request):
+    """
+    view for search accordingly filtering by fields 'brand' and 'type'
+    """
     if request.method == "POST":
         question = request.POST.get('search')
         cars = Car.objects.filter(brand__contains= question) | Car.objects.filter(type__contains = question)
@@ -30,6 +38,9 @@ def search_views(request):
 
 @login_required
 def create_car(request):
+    """
+    views for creating new car, not log in users will be redirect to /login/
+    """
     if request.method == 'POST':
         form = CarForm(request.POST, request.FILES or None)
 
@@ -49,6 +60,9 @@ def create_car(request):
 
 
 def car_detail(request, id):
+    """
+    views car detail
+    """
     car = get_object_or_404(Car, id=id)
     context = {
         'car': car
@@ -56,6 +70,9 @@ def car_detail(request, id):
     return render(request, 'automania/car.html', context)
 
 def all_car(request):
+    """
+    views list all car
+    """
     queryset = Car.objects.all()
     result = {
         'cars': queryset
@@ -64,6 +81,9 @@ def all_car(request):
 
 @login_required
 def make_order(request):
+    """
+    views for make order, not log in users will be redirect to /login/
+    """
     if request.method == 'POST':
         form = OrderForm(request.POST or None)
         if form.is_valid:
@@ -81,6 +101,9 @@ def make_order(request):
 
 @login_required
 def your_order(request):
+    """
+    view for user own orders
+    """
     obj = Order.objects.filter(published=request.user)
     context = {
         'orders': obj
@@ -90,6 +113,9 @@ def your_order(request):
 
 @login_required
 def your_posts(request):
+    """
+    view for user own posts
+    """
     obj = Car.objects.filter(published=request.user)
     context = {
         'cars': obj
@@ -98,6 +124,9 @@ def your_posts(request):
 
 @login_required
 def update_car(request,id):
+    """
+    view for update car
+    """
     car = get_object_or_404(Car, id=id)
     if request.method == 'POST':
         form = CarForm(request.POST, instance=car)
@@ -113,6 +142,9 @@ def update_car(request,id):
 
 @login_required
 def update_order(request, id):
+    """
+    view for update order
+    """
     order = get_object_or_404(Order, id=id)
     if request.method == 'POST':
         form = OrderForm(request.POST, instance=order)
@@ -135,6 +167,9 @@ def all_opinions(request):
 
 @login_required
 def leaving_opinion(request):
+    """
+    views for make opinion
+    """
     if request.method == 'POST':
         form = OpinionForm(request.POST or None)
         if form.is_valid():
@@ -148,6 +183,10 @@ def leaving_opinion(request):
 
 @login_required
 def messege(request, id_user):
+    """
+    view for create message to user with id_user,
+    plus create unread message and inform user about that with using context_processor
+    """
     to_user = get_object_or_404(User, id=id_user)
     if request.method == 'POST':
 
@@ -157,7 +196,7 @@ def messege(request, id_user):
         #create unread message
         unread_message = ReadedMesseges.objects.create(owner=to_user.username, message=message)
         message.save()
-        redirect('/user-messeges/')
+        return redirect('/user-messeges/')
     context = {
         'from_user': request.user,
         'to_user': to_user
@@ -166,6 +205,10 @@ def messege(request, id_user):
 
 @login_required
 def user_messeges(request):
+    """
+    views for user own messages,
+    unread messages collected for shown it in another color
+    """
     all_unread_or_read_message = ReadedMesseges.objects.filter(owner=request.user.username).order_by('data')
     user_send_messeges = Messeges.objects.filter(from_user=request.user).order_by('data')
     user_got_messeges = Messeges.objects.filter(to_user= request.user).order_by('data')
@@ -178,8 +221,10 @@ def user_messeges(request):
 
 @login_required
 def answer_to_messege(request, id_user, id_message):
+    """
+    views for make answer for message and make this message read put read to "True"
+    """
     read_message = get_object_or_404(ReadedMesseges,id=id_message)
-    print(read_message.read)
     read_message.read = True
     read_message.save()
     to_user = get_object_or_404(User, id=id_user)
@@ -200,6 +245,9 @@ def answer_to_messege(request, id_user, id_message):
 
 @login_required
 def delete_message(request, id_message):
+    """
+    view for delete message
+    """
     delete_messege = get_object_or_404(Messeges, id=id_message)
     delete_messege.delete()
     return redirect('/user-messeges')

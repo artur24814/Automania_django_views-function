@@ -2,6 +2,9 @@ from django import forms
 from .models import Car, Order, Opinion
 
 class CarForm(forms.ModelForm):
+    """
+    form to create model Car
+    """
     class Meta:
         model = Car
         fields = [
@@ -20,6 +23,9 @@ class CarForm(forms.ModelForm):
         ]
 
 class OrderForm(forms.ModelForm):
+    """
+    form to create model Order
+    """
     class Meta:
         model = Order
         fields = [
@@ -32,6 +38,9 @@ class OrderForm(forms.ModelForm):
         ]
 
 class OpinionForm(forms.ModelForm):
+    """
+    form to create model Opinion
+    """
     class Meta:
         model = Opinion
         fields = [
