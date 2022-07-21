@@ -2,8 +2,28 @@
 <img src="https://github.com/wsvincent/awesome-django/raw/main/assets/django-logo.svg">
 <ul>
 <h2>Contents</h2>
+<li><a href="#info"><h3>Info</h3></a>Information about the resources used in this project</li>
 <li><a href="#automania"><h3>AUTOMANIA</h3></a>Website for booking screenings at the cinema</li>
 <li><a href="#clone_project"><h3>Clone and Run a Django Project</h3></a>how run projects in your computer</li>
+</ul>
+<hr>
+
+<center><h1>INFO</h1></center>
+<h4>Information about the additional library, external Api used in this project and general information</h4>
+<ul>
+<li><strong>context_processors</strong><p>
+in this application I use my own processor context to check unread message and show it to user wherever user is in website
+</p></li>
+<li><strong>django-dotenv</strong>
+<p>using for hide SECRET_KEY from repositories
+</p></li>
+<li><strong>Views</strong>
+<p>I write it with using functions views, it's my own personal choice for this particular application 
+</p>
+</li>
+<li><strong>Tests</strong>
+<p>i used django TestCase to testing my application</p>
+<p> run test using command <code>python manage.py test automania</code> and <code>python manage.py test accounts</code></p> to test accounts app</li> </p></li>
 </ul>
 <hr>
 <center><h1 id="automania">AUTOMANIA <span style='font-size:80px;'>&#128664;</span></h1></center>
